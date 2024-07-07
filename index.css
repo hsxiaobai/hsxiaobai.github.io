@@ -1,3 +1,6 @@
 .intro {
   font-color: rgb(64,64,64);
 }
+.right {
+  float: right;
+}
