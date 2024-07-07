@@ -1,58 +1,10 @@
-<!DOCTYPE html>
+<!DOCOTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Upload to GitHub</title>
-</head>
-<body>
-    <input type="file" id="fileInput">
-    <button onclick="uploadFile()">Upload</button>
-
-    <script>
-        async function uploadFile() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-            if (!file) {
-                alert('Please select a file to upload.');
-                return;
-            }
-
-            // GitHub仓库的个人访问令牌（Personal Access Token）
-            const accessToken = 'your_github_access_token';
-            // GitHub仓库的名称和分支
-            const repo = 'username/repo';
-            const branch = 'branch_name';
-            // 文件的GitHub路径
-            const path = 'path/to/your/file.txt';
-
-            // 创建FormData对象并添加文件
-            const formData = new FormData();
-            formData.append('file', file);
-
-            try {
-                // 使用fetch API上传文件
-                const response = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${accessToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: 'Uploading a file',
-                        content: btoa(await file.text()) // 将文件内容转换为Base64
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`GitHub API responded with ${response.status}`);
-                }
-
-                alert('File uploaded successfully.');
-            } catch (error) {
-                console.error('Error uploading file:', error);
-                alert('Failed to upload file.');
-            }
-        }
-    </script>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>一个平平无奇的工具箱</title>
+        <link rel="stylesheet" href="index.css">
+        <script src="index.js"></script>
+    </head>
 </html>
