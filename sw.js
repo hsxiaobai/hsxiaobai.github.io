@@ -1,14 +1,14 @@
 self.addEventListener("fetch", (evt) => {
-  if (evt.request.method === "POST" && evt.request.url.includes("/pro/h5")) {
+  if (evt.request.method === "GET" && evt.request.url.includes("/pro/h5")) {
+    // 获取 URL 中的查询参数
+    const url = new URL(evt.request.url);
+    const code = url.searchParams.get('code'); // 获取 URL 查询参数中的 code 字段
+
     evt.respondWith(
-      evt.request.clone().text().then((body) => {
-        const form = new URLSearchParams(body);
-        const code = form.get('code'); // 获取表单中的 code 字段
-        return new Response(code, {
-          headers: { "Content-Type": "text/plain" }, // 返回文本内容
-          status: 200,
-          statusText: "OK"
-        });
+      new Response(code, {
+        headers: { "Content-Type": "text/plain" },
+        status: 200,
+        statusText: "OK"
       })
     );
   }
