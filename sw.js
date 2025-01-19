@@ -1,11 +1,12 @@
 self.addEventListener("fetch", (evt) => {
-  if (evt.request.method === "GET" && evt.request.url.includes("/data")) {
+  if (evt.request.method === "POST" && evt.request.url.includes("/pro/h5")) {
+    var form = evt.request.clone().json()
     evt.respondWith(
-      new Response("Hello!", {
-        headers: { "Content-Type": "text/plain" },
+      new Response(form.code, {
+        headers: { "Content-Type": "text/html" },
         status: 200,
         statusText: "OK"
       })
-    );
+    )
   }
 });
