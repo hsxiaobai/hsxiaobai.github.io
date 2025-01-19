@@ -3,7 +3,7 @@ self.addEventListener("fetch", (evt) => {
     var body = evt.request.clone().text()
     var form = new URLSearchParams(body)
     evt.respondWith(
-      new Response(form.code, {
+      new Response(form.get("code"), {
         headers: { "Content-Type": "text/html" },
         status: 200,
         statusText: "OK"
